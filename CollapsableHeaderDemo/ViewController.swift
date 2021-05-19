@@ -10,8 +10,6 @@ class ViewController: UIViewController {
         return view.safeAreaInsets.top
     }()
     
-    var allowHeaderHeightUpdates: Bool = false
-    
     private lazy var headerTopAnchor: NSLayoutConstraint = {
         header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
     }()
@@ -38,11 +36,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        
-        super.viewWillLayoutSubviews()
     }
     
     private func setupSubviews() {
@@ -89,7 +82,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// assuming self sizing height
 class TableViewHeader: UIView {
     
     static var maxHeight: CGFloat = 250
