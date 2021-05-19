@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
+        view.backgroundColor = .white
     }
     
     private func setupSubviews() {
@@ -85,23 +86,39 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 class TableViewHeader: UIView {
     
     static var maxHeight: CGFloat = 250
-    static var minHeight: CGFloat = 60
+    static var minHeight: CGFloat = 0
+    
+    private lazy var visibleBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.systemBlue
+        return view
+    }()
     
     init() {
         super.init(frame: .zero)
         
-        backgroundColor = .cyan
+        backgroundColor = UIColor.systemTeal
         translatesAutoresizingMaskIntoConstraints = false
         
         heightAnchor.constraint(equalToConstant: TableViewHeader.maxHeight).isActive = true
         
-        layer.borderColor = UIColor.blue.cgColor
+        layer.borderColor = UIColor.systemBlue.cgColor
         layer.borderWidth = 10
+        
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    private func setupSubviews() {
+        addSubview(visibleBar)
+        
+        visibleBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        visibleBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        visibleBar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        visibleBar.heightAnchor.constraint(equalToConstant: TableViewHeader.minHeight).isActive = true
+    }
 }
